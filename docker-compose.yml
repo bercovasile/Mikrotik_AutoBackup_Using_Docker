@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  backup:
+    image: mikrotik-backup-image:v01.1.0
+    environment:
+      - G_U = username
+      - G_T =/run/secrets/tokens
+      - G_R = repositoriesName
+      - M_U = /run/secrets/username
+      - M_P = /run/secrets/password
+      - M_KEY = /run/secrets/mikrotik_key
+      - M_IP = /run/secrets/mikrotik_ip
+      - D_KEY = /run/secrets/decrypt_key
+    secrets:
+      - tokens
+      - username
+      - password
+      - mikrotik_key
+      - mikrotik_ip
+      - decrypt_key
+
+secrets:
+
+  tokens:
+    file: ./enc_file/enc_t
+
+  username:
+    file: ./enc_file/enc_u
+
+  password:
+    file: ./enc_file/enc_p
+
+  mikrotik_key:
+    file: ./enc_file/enc_k
+  
+  mikrotik_ip:
+    file: ./ip/mikrotik_ip.txt
+  
+  decrypt_key:
+    file: ./enc_file/enc_d

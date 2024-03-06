@@ -1,0 +1,36 @@
+docker run -d \
+    --name backup \
+    --env G_U=username \
+    --env G_T=/run/secrets/tokens \
+    --env G_R=repositoris \
+    --env M_U=/run/secrets/username \
+    --env M_P=/run/secrets/password \
+    --env M_KEY=/run/secrets/mikrotik_key \
+    --env M_IP=/run/secrets/mikrotik_ip \
+    --env D_KEY=decripted key \
+    --volume $(pwd)/enc_file/enc_t:/run/secrets/tokens \
+    --volume $(pwd)/enc_file/enc_u:/run/secrets/username \
+    --volume $(pwd)/enc_file/enc_p:/run/secrets/password \
+    --volume $(pwd)/enc_file/enc_k:/run/secrets/mikrotik_key \
+    --volume $(pwd)/ip/mikrotik_ip.txt:/run/secrets/mikrotik_ip \
+    mikrotik-backup-image:v01.1.0 
+
+OR
+
+docker run -d \
+  --name backup \
+  --env G_U=username \
+  --env G_T=/run/secrets/tokens \
+  --env G_R=repositoris \
+  --env M_U=/run/secrets/username \
+  --env M_P=/run/secrets/password \
+  --env M_KEY=/run/secrets/mikrotik_key \
+  --env M_IP=/run/secrets/mikrotik_ip \
+  --env D_KEY=/run/secrets/decrypt_key \
+  --volume $(pwd)/enc_file/enc_t:/run/secrets/tokens \
+  --volume $(pwd)/enc_file/enc_u:/run/secrets/username \
+  --volume $(pwd)/enc_file/enc_p:/run/secrets/password \
+  --volume $(pwd)/enc_file/enc_k:/run/secrets/mikrotik_key \
+  --volume $(pwd)/ip/mikrotik_ip.txt:/run/secrets/mikrotik_ip \
+  --volume $(pwd)/enc_file/enc_d:/run/secrets/decrypt_key \
+  mikrotik-backup-image:v01.2.0

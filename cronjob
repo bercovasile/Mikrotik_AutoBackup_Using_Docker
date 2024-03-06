@@ -1,0 +1,1 @@
+0 1 1 * * /app/backup.sh >> /var/log/script.log 2>&1 
